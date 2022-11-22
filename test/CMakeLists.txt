@@ -1,0 +1,2 @@
+add_executable(KebaCharger_Test main.cpp)
+target_link_libraries(KebaCharger_Test KebaCharger)
