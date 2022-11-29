@@ -2,10 +2,14 @@
 #include <thread>
 
 int main(int argc, char **argv){
-    KebaCharger charger("KebaCharger0", "192.168.178.88");
+    // std::string ip = "192.168.178.88";
+    std::string ip = "192.168.178.182";
+    KebaCharger charger("KebaCharger0", ip);
     KebaCharger::ChargingState chargingstate = charger.getChargingState();
     KebaCharger::CableState cableState = charger.getCableState();
     float power = charger.using_power();
+    float total_energy = chaget.getTotalEnergy();
+    std::array<float
     float powerfactor = charger.power_factor();
     float chargingCurrent = charger.getChargingCurrent();
     float maxChargingCurrent = charger.maxChargingCurrent();

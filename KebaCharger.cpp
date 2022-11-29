@@ -8,6 +8,10 @@ KebaCharger::KebaCharger(const std::string& name, const std::string& ipAddress, 
     mbReg_current_L2(this, 1010, 1),
     mbReg_current_L3(this, 1012, 1),
     mbReg_power(this, 1020, 1, " mW"),
+    mbReg_total_energy(this, 1036, 1, " Wh"),
+    mbReg_voltage_L1(this, 1040, 1, " V"),
+    mbReg_voltage_L2(this, 1042, 1, " V"),
+    mbReg_voltage_L3(this, 1044, 1, " V"),
     mbReg_powerfactor(this, 1046, 1),
     mbReg_maxChargingCurrent(this, 1100),
     mbReg_maxSupportedCurrent(this, 1110),
@@ -73,6 +77,30 @@ float KebaCharger::getChargingCurrent() const {
     float res = 0;
     for(uint32_t i = 0; i < cur.size(); ++i){
         res += cur[i];
+    }
+    return res/3;
+}
+
+float KebaCharger::getTotalEnergy() const {
+    bool _res = true;
+    auto totaL_energy = mbReg_total_energy.getValue(true, &_res);
+    return totaL_energy;
+}
+
+std::array<float, 3> KebaCharger::getVoltagePerPhase() const {
+    bool _res = true;
+    std::array<float, 3> res = {0};
+    res[0] = mbReg_voltage_L1.getValue(true, &_res);
+    res[1] = mbReg_voltage_L2.getValue(true, &_res);
+    res[2] = mbReg_voltage_L3.getValue(true, &_res);
+    return res;
+}
+
+float KebaCharger::getVoltage() const {
+    auto voltages = getVoltagePerPhase();
+    float res = 0;
+    for(uint32_t i = 0; i < voltages.size(); ++i){
+        res += voltages[i];
     }
     return res/3;
 }

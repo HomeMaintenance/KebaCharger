@@ -36,6 +36,11 @@ public:
     std::array<float, 3> getChargingCurrentPerPhase() const;
     float getChargingCurrent() const;
 
+    float getTotalEnergy() const;
+
+    std::array<float, 3> getVoltagePerPhase() const;
+    float getVoltage() const;
+
     float maxChargingCurrent() const;
     float maxSupportedCurrent() const;
     uint32_t rfidCard() const;
@@ -62,6 +67,10 @@ private:
     mb::Register<unsigned int> mbReg_current_L1;
     mb::Register<unsigned int> mbReg_current_L2;
     mb::Register<unsigned int> mbReg_current_L3;
+    mb::Register<unsigned int> mbReg_total_energy;
+    mb::Register<unsigned int> mbReg_voltage_L1;
+    mb::Register<unsigned int> mbReg_voltage_L2;
+    mb::Register<unsigned int> mbReg_voltage_L3;
     mb::Register<unsigned int> mbReg_power;
     mb::Register<unsigned int> mbReg_powerfactor;
     mb::Register<unsigned int> mbReg_maxChargingCurrent;
