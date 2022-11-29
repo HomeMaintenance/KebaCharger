@@ -8,8 +8,8 @@ int main(int argc, char **argv){
     KebaCharger::ChargingState chargingstate = charger.getChargingState();
     KebaCharger::CableState cableState = charger.getCableState();
     float power = charger.using_power();
-    float total_energy = chaget.getTotalEnergy();
-    std::array<float
+    float total_energy = charger.getTotalEnergy();
+    std::array<float, 3> voltages = charger.getVoltagePerPhase();
     float powerfactor = charger.power_factor();
     float chargingCurrent = charger.getChargingCurrent();
     float maxChargingCurrent = charger.maxChargingCurrent();
